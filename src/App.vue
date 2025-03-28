@@ -45,19 +45,6 @@
                 <SvgIcon
                   :iconName="`icon-${status.siteStatus !== 'set' ? 'setting' : 'home'}`"
                   :key="status.siteStatus !== 'set' ? 'setting' : 'home'"
-                />
-              </Transition>
-            </div>
-          </div>
-        </Transition>
-      </main>
-      <div v-else id="loading">
-        <img src="/icon/logo.png" alt="logo" class="logo" />
-        <span class="tip">科技-刘</span>
-      </div>
-    </Transition>
-  </Provider>
-</template>
 
 <script setup>
 import { onMounted, nextTick, watch, ref } from "vue";
