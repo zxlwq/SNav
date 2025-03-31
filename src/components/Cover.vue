@@ -49,7 +49,7 @@ const imgLoadComplete = () => {
 // 图片加载失败，使用备用图片
 const imgLoadError = () => {
   console.error("壁纸加载失败，使用默认壁纸");
-  bgUrl.value = "/background/bg4.jpg";
+  bgUrl.value = "/background/default.jpg";
 };
 
 onMounted(() => {
