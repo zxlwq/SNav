@@ -35,24 +35,24 @@ const setBgUrl = () => {
   const { backgroundType } = set;
   switch (backgroundType) {
     case 0:
-      bgUrl.value = `/background/bg${bgRandom}.jpg`;
+      bgUrl.value = `/background/bg4.jpg`;  // 默认背景
       break;
     case 1: {
       const isMobile = window.innerWidth < 768;
-      bgUrl.value = `https://api.dujin.org/bing/${isMobile ? "m" : "1920"}.php`;
+      bgUrl.value = `https://api.dujin.org/bing/${isMobile ? "m" : "1920"}.php`;  // 必应背景
       break;
     }
     case 2:
-      bgUrl.value = "https://api.aixiaowai.cn/gqapi/gqapi.php";
+      bgUrl.value = "https://api.aixiaowai.cn/gqapi/gqapi.php";  // 随机风景背景
       break;
     case 3:
-      bgUrl.value = "https://api.aixiaowai.cn/api/api.php";
+      bgUrl.value = "https://api.aixiaowai.cn/api/api.php";  // 随机动漫背景
       break;
     case 4:
-      bgUrl.value = set.backgroundCustom;
+      bgUrl.value = "https://images.zxl.cc.ua/blog/12.webp";  // 自定义背景
       break;
     default:
-      bgUrl.value = `/background/bg${bgRandom}.jpg`;
+      bgUrl.value = `/background/bg4.jpg`;  // 默认背景
       break;
   }
 };
@@ -61,24 +61,17 @@ const setBgUrl = () => {
 const imgLoadComplete = () => {
   imgTimeout.value = setTimeout(
     () => {
-      status.setImgLoadStatus(true);
+      status.setImgLoadStatus(true);  // 设置图片加载状态为已加载
     },
-    Math.floor(Math.random() * (600 - 300 + 1)) + 300,
+    Math.floor(Math.random() * (600 - 300 + 1)) + 300,  // 随机延时
   );
 };
 
 // 图片动画完成
 const imgAnimationEnd = () => {
   console.log("壁纸加载且动画完成");
-  // 加载完成事件
+  // 执行加载完成的回调事件
   emit("loadComplete");
-};
-  
-  // 假设你有一个自定义壁纸 URL
-  const customFallbackUrl = 'https://images.zxl.cc.ua/blog/12.webp';
-
-  // 如果你有自定义壁纸，则使用它；否则，使用默认背景
-  bgUrl.value = customFallbackUrl || `/background/bg4.jpg`;
 };
 
 
