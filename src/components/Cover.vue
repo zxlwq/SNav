@@ -11,7 +11,7 @@
       @animationend="imgAnimationEnd"
     />
     <Transition name="fade">
-      <div v-if="set.showBackgroundGray" class="gray" />
+      <div class="gray" />
     </Transition>
   </div>
 </template>
