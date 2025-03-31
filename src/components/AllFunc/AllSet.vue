@@ -94,39 +94,29 @@
           </n-card>
         </n-scrollbar>
       </n-tab-pane>
-  <n-tab-pane name="personalization" tab="个性调整">
-    <n-scrollbar class="scrollbar">
-    <n-h6 prefix="bar"> 壁纸 </n-h6>
-    <n-card class="set-item">
-      <div class="name">
-        <span class="title">壁纸遮罩</span>
-        <span class="tip">壁纸周围是否显示暗色遮罩</span>
-      </div>
-      <n-switch v-model:value="showBackgroundGray" :round="true" />
-    </n-card>
-    <n-card class="set-item">
-      <div class="name">
-         <span class="title">壁纸透明度</span>
-         <span class="tip">调整壁纸的透明度</span>
-       </div>
-       <n-slider
-         class="set"
-         v-model:value="backgroundOpacity"
-         :step="0.01"
-         :min="0"
-         :max="1"
-         :tooltip="true"
-        />
-    </n-card>
-    <n-card class="set-item">
-      <div class="name">
-         <span class="title">夜间模式</span>
-         <span class="tip">自动调整壁纸适应夜间模式</span>
-       </div>
-       <n-switch v-model:value="enableNightMode" :round="true" />
-      </n-card>
-      </n-scrollbar>
-      </n-tab-pane>
+      <n-tab-pane name="personalization" tab="个性调整">
+        <n-scrollbar class="scrollbar">
+          <n-h6 prefix="bar"> 壁纸 </n-h6>
+          <n-card class="set-item">
+            <div class="name">
+              <span class="title">壁纸遮罩</span>
+              <span class="tip">壁纸周围是否显示暗色遮罩</span>
+            </div>
+            <n-switch v-model:value="showBackgroundGray" :round="false" />
+          </n-card>
+          <n-card class="set-item">
+            <div class="name">
+              <span class="title">壁纸模糊</span>
+              <span class="tip">调整壁纸高斯模糊的程度</span>
+            </div>
+            <n-slider
+              class="set"
+              v-model:value="backgroundBlur"
+              :step="0.01"
+              :min="0"
+              :max="10"
+              :tooltip="false"
+            />
          <n-h6 prefix="bar"> 天气与时间 </n-h6>
           <n-card class="set-item">
             <div class="name">
