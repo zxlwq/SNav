@@ -8,7 +8,11 @@
       :style="{ '--blur': set.backgroundBlur + 'px' }"
       @load="imgLoadComplete"
       @error.once="imgLoadError"
+      @animationend="imgAnimationEnd"
     />
+    <Transition name="fade">
+      <div v-if="set.showBackgroundGray" class="gray" />
+    </Transition>
   </div>
 </template>
 
@@ -22,34 +26,59 @@ const bgUrl = ref(null);
 const imgTimeout = ref(null);
 const emit = defineEmits(["loadComplete"]);
 
-// 设置背景图
+// 壁纸随机数
+// 请依据文件夹内的图片个数修改 Math.random() 后面的第一个数字
+const bgRandom = Math.floor(Math.random() * 3 + 1);
+
+// 赋值壁纸
 const setBgUrl = () => {
-  const backgroundType = set.backgroundType ?? 1; // 允许 Pinia 配置背景类型
+  const { backgroundType } = set;
   switch (backgroundType) {
     case 0:
-      bgUrl.value = `/background/bg4.jpg`;
+      bgUrl.value = `/background/bg${bgRandom}.jpg`;
       break;
-    case 1:
-      bgUrl.value = "https://images.zxl.cc.ua/blog/12.webp"; // 自定义壁纸
+    case 1: {
+      const isMobile = window.innerWidth < 768;
+      bgUrl.value = `https://api.dujin.org/bing/${isMobile ? "m" : "1920"}.php`;
+      break;
+    }
+    case 2:
+      bgUrl.value = "https://api.aixiaowai.cn/gqapi/gqapi.php";
+      break;
+    case 3:
+      bgUrl.value = "https://api.aixiaowai.cn/api/api.php";
+      break;
+    case 4:
+      bgUrl.value = set.backgroundCustom;
       break;
     default:
-      bgUrl.value = `/background/bg4.jpg`;
+      bgUrl.value = `/background/bg${bgRandom}.jpg`;
       break;
   }
 };
 
 // 图片加载完成
 const imgLoadComplete = () => {
-  clearTimeout(imgTimeout.value);
-  imgTimeout.value = setTimeout(() => {
-    status.setImgLoadStatus(true);
-  }, Math.floor(Math.random() * 301) + 300); // 随机 300~600ms
+  imgTimeout.value = setTimeout(
+    () => {
+      status.setImgLoadStatus(true);
+    },
+    Math.floor(Math.random() * (600 - 300 + 1)) + 300,
+  );
 };
 
-// 图片加载失败，使用备用图片
+// 图片动画完成
+const imgAnimationEnd = () => {
+  console.log("壁纸加载且动画完成");
+  // 加载完成事件
+  emit("loadComplete");
+};
+
+// 图片显示失败
 const imgLoadError = () => {
-  console.error("壁纸加载失败，使用默认壁纸");
-  bgUrl.value = "/background/default.jpg";
+  console.error("壁纸加载失败：", bgUrl.value);
+  $message.error("壁纸加载失败，已临时切换回默认");
+  bgUrl.value = `/background/bg${bgRandom}.jpg`;
 };
 
 onMounted(() => {
@@ -83,6 +112,19 @@ onBeforeUnmount(() => {
     backface-visibility: hidden;
     transform: scale(1.2);
     filter: blur(var(--blur));
+    transition:
+      filter 0.3s,
+      transform 0.3s;
+    animation: fade-blur-in 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  .gray {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.5) 100%),
+      radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0.3) 166%);
   }
 }
 </style>
