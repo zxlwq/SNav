@@ -117,7 +117,8 @@
               :max="10"
               :tooltip="false"
             />
-         <n-h6 prefix="bar"> 天气与时间 </n-h6>
+          </n-card>
+          <n-h6 prefix="bar"> 天气与时间 </n-h6>
           <n-card class="set-item">
             <div class="name">
               <span class="title">天气显示</span>
@@ -321,7 +322,7 @@ const changeBackground = (type, reset = false) => {
         $message.info("已恢复为默认壁纸，刷新后生效");
       },
     });
-    return false;
+    return true;
   }
   backgroundType.value = type;
   $message.success(`已切换为${backgroundTypeArr[type].name}，刷新后生效`);
