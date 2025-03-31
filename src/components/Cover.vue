@@ -11,7 +11,7 @@
       @animationend="imgAnimationEnd"
     />
     <Transition name="fade">
-      <div v-if="false" class="gray" />
+      <div v-if="set.showBackgroundGray" class="gray" />
     </Transition>
   </div>
 </template>
@@ -35,26 +35,50 @@ const setBgUrl = () => {
   const { backgroundType } = set;
   switch (backgroundType) {
     case 0:
-      bgUrl.value = `/background/bg4.jpg`;  // 默认背景
+      bgUrl.value = `/background/bg${bgRandom}.jpg`;
       break;
     case 1: {
       const isMobile = window.innerWidth < 768;
-      bgUrl.value = `https://api.dujin.org/bing/${isMobile ? "m" : "1920"}.php`;  // 必应背景
+      bgUrl.value = `https://api.dujin.org/bing/${isMobile ? "m" : "1920"}.php`;
       break;
     }
     case 2:
-      bgUrl.value = "https://api.aixiaowai.cn/gqapi/gqapi.php";  // 随机风景背景
+      bgUrl.value = "https://api.aixiaowai.cn/gqapi/gqapi.php";
       break;
     case 3:
-      bgUrl.value = "https://api.aixiaowai.cn/api/api.php";  // 随机动漫背景
+      bgUrl.value = "https://api.aixiaowai.cn/api/api.php";
       break;
     case 4:
-      bgUrl.value = "https://images.zxl.cc.ua/blog/12.webp";  // 自定义背景
+      bgUrl.value = set.backgroundCustom;
       break;
     default:
-      bgUrl.value = `/background/bg4.jpg`;  // 默认背景
+      bgUrl.value = `/background/bg${bgRandom}.jpg`;
       break;
   }
+};
+
+// 图片加载完成
+const imgLoadComplete = () => {
+  imgTimeout.value = setTimeout(
+    () => {
+      status.setImgLoadStatus(true);
+    },
+    Math.floor(Math.random() * (600 - 300 + 1)) + 300,
+  );
+};
+
+// 图片动画完成
+const imgAnimationEnd = () => {
+  console.log("壁纸加载且动画完成");
+  // 加载完成事件
+  emit("loadComplete");
+};
+
+// 图片显示失败
+const imgLoadError = () => {
+  console.error("壁纸加载失败：", bgUrl.value);
+  $message.error("壁纸加载失败，已临时切换回默认");
+  bgUrl.value = `/background/bg${bgRandom}.jpg`;
 };
 
 onMounted(() => {
