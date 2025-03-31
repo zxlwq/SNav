@@ -12,7 +12,7 @@ const useSetDataStore = defineStore("setData", {
       // 壁纸遮罩
       showBackgroundGray: true,
       // 壁纸亮度（默认 100%）
-      backgroundBrightness: 70,
+      backgroundBrightness: 50,
       // 搜索引擎
       searchEngine: "bing",
       lastSearchEngine: "bing",
