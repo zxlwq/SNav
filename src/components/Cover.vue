@@ -10,11 +10,23 @@
       @error.once="imgLoadError"
       @animationend="imgAnimationEnd"
     />
-    <Transition name="fade">
-      <div v-if="set.showBackgroundGray" class="gray" />
-    </Transition>
-  </div>
-</template>
+<Transition name="fade">
+   <div v-if="set.showBackgroundGray" class="background-overlay" />
+</Transition>
+<style scoped>
+.background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://images.zxl.cc.ua/blog/12.webp'); /* 替换成你的背景图片 */
+  background-size: cover;
+  background-position: center;
+  opacity: 0.5; /* 可调节透明度 */
+}
+</style>
+
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
