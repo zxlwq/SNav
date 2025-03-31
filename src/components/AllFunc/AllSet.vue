@@ -201,6 +201,11 @@
           </n-card>
         </n-scrollbar>
       </n-tab-pane>
+          <!-- 保存 & 重置 按钮 -->
+    <n-space justify="end" class="action-buttons">
+      <n-button strong secondary @click="resetSettings"> 重置 </n-button>
+      <n-button strong type="primary" @click="saveSettings"> 保存 </n-button>
+    </n-space>
       <n-tab-pane name="other" tab="其他设置">
         <n-scrollbar class="scrollbar">
           <n-h6 prefix="bar"> 重置 </n-h6>
