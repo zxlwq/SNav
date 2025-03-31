@@ -115,7 +115,7 @@
               :step="0.01"
               :min="0"
               :max="10"
-              :tooltip="false"
+              :tooltip="true"
             />
         </n-card>
         <n-card class="set-item">
