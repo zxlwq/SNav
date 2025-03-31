@@ -43,6 +43,15 @@ const setBgUrl = () => {
   }
 };
 
+// 图片加载完成
+const imgLoadComplete = () => {
+  imgTimeout.value = setTimeout(
+    () => {
+      status.setImgLoadStatus(true);
+    },
+    Math.floor(Math.random() * (600 - 300 + 1)) + 300,
+  );
+  
 onMounted(() => {
   setBgUrl();
 });
