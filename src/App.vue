@@ -51,8 +51,6 @@
           </div>
         </Transition>
       </main>
-      <div v-else id="loading">
-        <img src="/icon/logo.png" alt="logo" class="logo" />
       </div>
     </Transition>
   </Provider>
