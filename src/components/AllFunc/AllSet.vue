@@ -102,7 +102,7 @@
               <span class="title">壁纸遮罩</span>
               <span class="tip">壁纸周围是否显示暗色遮罩</span>
             </div>
-            <n-switch v-model:value="showBackgroundGray" :round="false" />
+            <n-switch v-model:value="showBackgroundGray" :round="true" />
           </n-card>
           <n-card class="set-item">
             <div class="name">
