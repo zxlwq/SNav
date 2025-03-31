@@ -128,7 +128,7 @@
              v-model:value="backgroundBrightness"
              :step="0.01"
              :min="0"
-             :max="2"
+             :max="100"
              :tooltip="true"
             />
           </n-card>
