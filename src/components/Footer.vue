@@ -9,7 +9,7 @@
       <span v-if="icp" class="icp" @click="jumpTo('')">
         {{ icp }}
       </span>
-      <span class="about" @click="aboutSiteModal = true">关于</span>
+      <span class="about" @click="aboutSiteModal = true">主页</span>
     </div>
     <!-- 关于 -->
     <n-modal
