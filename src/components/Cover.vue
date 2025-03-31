@@ -20,35 +20,27 @@ const set = setStore();
 const status = statusStore();
 const bgUrl = ref(null);
 
-// 壁纸随机数
-const bgRandom = Math.floor(Math.random() * 3 + 1);
-
 // 赋值壁纸
 const setBgUrl = () => {
   const { backgroundType } = set;
   switch (backgroundType) {
     case 0:
-      bgUrl.value = `/background/bg4.jpg`;
+      bgUrl.value = `/background/bg4.jpg`; // 默认背景
       break;
     case 1: {
       const isMobile = window.innerWidth < 768;
-      bgUrl.value = `https://api.dujin.org/bing/${isMobile ? "m" : "1920"}.php`;
+      bgUrl.value = `https://images.zxl.cc.ua/blog/12.webp${isMobile ? "?m" : "?1920"}`; // 根据设备设置壁纸大小
       break;
     }
     case 2:
-      bgUrl.value = "https://api.aixiaowai.cn/gqapi/gqapi.php";
-      break;
-    case 3:
-      bgUrl.value = "https://api.aixiaowai.cn/api/api.php";
-      break;
-    case 4:
-      bgUrl.value = set.backgroundCustom;
+      bgUrl.value = "https://images.zxl.cc.ua/blog/12.webp"; // 使用统一的自定义背景
       break;
     default:
-      bgUrl.value = `/background/bg4.jpg`;
+      bgUrl.value = `/background/bg4.jpg`; // 默认背景
       break;
   }
 };
+
 
 onMounted(() => {
   setBgUrl();
