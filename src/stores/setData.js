@@ -11,8 +11,8 @@ const useSetDataStore = defineStore("setData", {
       backgroundCustom: "https://images.zxl.cc.ua/blog/12.webp",
       // 壁纸遮罩
       showBackgroundGray: true,
-      // 壁纸模糊
-      backgroundBlur: 0,
+      // 壁纸亮度（默认 100%）
+      backgroundBrightness: 70,
       // 搜索引擎
       searchEngine: "bing",
       lastSearchEngine: "bing",
