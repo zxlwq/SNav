@@ -102,7 +102,7 @@
            <span class="title">壁纸遮罩</span>
         <span class="tip">壁纸周围是否显示暗色遮罩</span>
            </div>
-       <n-switch v-model:value="showBackgroundGray" :round="false" />
+       <n-switch v-model:value="showBackgroundGray" :round="true" />
           </n-card>
 
            <n-card class="set-item">
@@ -116,7 +116,7 @@
     :step="0.01"
     :min="0"
     :max="10"
-    :tooltip="false"
+    :tooltip="true"
     />
     </n-card>
 
@@ -132,7 +132,7 @@
     :step="0.01"
     :min="0"
     :max="1"
-    :tooltip="false"
+    :tooltip="true"
      />
      </n-card>
 
@@ -201,11 +201,6 @@
           </n-card>
         </n-scrollbar>
       </n-tab-pane>
-          <!-- 保存 & 重置 按钮 -->
-    <n-space justify="end" class="action-buttons">
-      <n-button strong secondary @click="resetSettings"> 重置 </n-button>
-      <n-button strong type="primary" @click="saveSettings"> 保存 </n-button>
-    </n-space>
       <n-tab-pane name="other" tab="其他设置">
         <n-scrollbar class="scrollbar">
           <n-h6 prefix="bar"> 重置 </n-h6>
