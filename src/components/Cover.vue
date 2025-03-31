@@ -73,10 +73,6 @@ const imgAnimationEnd = () => {
   // 加载完成事件
   emit("loadComplete");
 };
-
-// 图片显示失败
-const imgLoadError = () => {
-  console.error("壁纸加载失败：", bgUrl.value);
   
   // 假设你有一个自定义壁纸 URL
   const customFallbackUrl = 'https://images.zxl.cc.ua/blog/12.webp';
