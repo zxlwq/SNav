@@ -10,6 +10,9 @@
       @error="imgLoadError"
       @animationend="imgAnimationEnd"
     />
+    <Transition name="fade">
+      <div v-if="set.showBackgroundGray" class="gray" />
+    </Transition>
   </div>
 </template>
 
