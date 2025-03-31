@@ -117,6 +117,20 @@
               :max="10"
               :tooltip="false"
             />
+        </n-card>
+        <n-card class="set-item">
+          <div class="name">
+             <span class="title">壁纸亮度</span>
+             <span class="tip">调整壁纸的整体亮度</span>
+           </div>
+           <n-slider
+             class="set"
+             v-model:value="backgroundBrightness"
+             :step="0.01"
+             :min="0"
+             :max="2"
+             :tooltip="true"
+            />
           </n-card>
           <n-h6 prefix="bar"> 天气与时间 </n-h6>
           <n-card class="set-item">
