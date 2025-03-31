@@ -51,6 +51,7 @@
           </div>
         </Transition>
       </main>
+      <div v-else id="loading">
       </div>
     </Transition>
   </Provider>
