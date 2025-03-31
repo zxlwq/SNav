@@ -53,7 +53,6 @@
       </main>
       <div v-else id="loading">
         <img src="/icon/logo.png" alt="logo" class="logo" />
-        <span class="tip">科技-刘</span>
       </div>
     </Transition>
   </Provider>
