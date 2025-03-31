@@ -97,27 +97,45 @@
       <n-tab-pane name="personalization" tab="个性调整">
         <n-scrollbar class="scrollbar">
           <n-h6 prefix="bar"> 壁纸 </n-h6>
-          <n-card class="set-item">
-            <div class="name">
-              <span class="title">壁纸遮罩</span>
-              <span class="tip">壁纸周围是否显示暗色遮罩</span>
-            </div>
-            <n-switch v-model:value="showBackgroundGray" :round="false" />
+         <n-card class="set-item">
+           <div class="name">
+           <span class="title">壁纸遮罩</span>
+        <span class="tip">壁纸周围是否显示暗色遮罩</span>
+           </div>
+       <n-switch v-model:value="showBackgroundGray" :round="false" />
           </n-card>
-          <n-card class="set-item">
-            <div class="name">
-              <span class="title">壁纸模糊</span>
-              <span class="tip">调整壁纸高斯模糊的程度</span>
-            </div>
-            <n-slider
-              class="set"
-              v-model:value="backgroundBlur"
-              :step="0.01"
-              :min="0"
-              :max="10"
-              :tooltip="false"
-            />
-          </n-card>
+
+           <n-card class="set-item">
+          <div class="name">
+       <span class="title">壁纸模糊</span>
+       <span class="tip">调整壁纸高斯模糊的程度</span>
+     </div>
+     <n-slider
+    class="set"
+    v-model:value="backgroundBlur"
+    :step="0.01"
+    :min="0"
+    :max="10"
+    :tooltip="false"
+    />
+    </n-card>
+
+   <!-- 添加壁纸不透明度 -->
+   <n-card class="set-item">
+    <div class="name">
+    <span class="title">壁纸不透明度</span>
+    <span class="tip">调整壁纸的不透明度（0为完全透明，1为完全不透明）</span>
+    </div>
+    <n-slider
+    class="set"
+    v-model:value="backgroundOpacity"
+    :step="0.01"
+    :min="0"
+    :max="1"
+    :tooltip="false"
+     />
+     </n-card>
+
           <n-h6 prefix="bar"> 天气与时间 </n-h6>
           <n-card class="set-item">
             <div class="name">
