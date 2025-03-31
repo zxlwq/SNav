@@ -8,7 +8,6 @@
       :style="{ '--blur': set.backgroundBlur + 'px' }"
       @load="imgLoadComplete"
       @error.once="imgLoadError"
-      @animationend="imgAnimationEnd"
     />
     <Transition name="fade">
       <div v-if="set.showBackgroundGray" class="gray" />
@@ -23,36 +22,16 @@ import { statusStore, setStore } from "@/stores";
 const set = setStore();
 const status = statusStore();
 const bgUrl = ref(null);
-const imgTimeout = ref(null);
-const emit = defineEmits(["loadComplete"]);
 
 // 赋值壁纸
 const setBgUrl = () => {
   const { backgroundType, backgroundCustom } = set;
-  switch (backgroundType) {
-    case 0:
-      bgUrl.value = "/background/bg4.jpg";
-      break;
-    case 1:
-      bgUrl.value = backgroundCustom || "https://images.zxl.cc.ua/blog/12.webp";
-      break;
-    default:
-      bgUrl.value = "/background/bg4.jpg";
-      break;
-  }
+  bgUrl.value = backgroundType === 1 && backgroundCustom ? backgroundCustom : "/background/bg4.jpg";
 };
 
 // 图片加载完成
 const imgLoadComplete = () => {
-  imgTimeout.value = setTimeout(() => {
-    status.setImgLoadStatus(true);
-  }, Math.floor(Math.random() * (600 - 300 + 1)) + 300);
-};
-
-// 图片动画完成
-const imgAnimationEnd = () => {
-  console.log("壁纸加载且动画完成");
-  emit("loadComplete");
+  status.setImgLoadStatus(true);
 };
 
 // 图片显示失败
@@ -62,14 +41,7 @@ const imgLoadError = () => {
   bgUrl.value = "/background/bg4.jpg";
 };
 
-
-onMounted(() => {
-  setBgUrl();
-});
-
-onBeforeUnmount(() => {
-  clearTimeout(imgTimeout.value);
-});
+onMounted(setBgUrl);
 </script>
 
 <style lang="scss" scoped>
@@ -84,29 +56,27 @@ onBeforeUnmount(() => {
       transform: scale(1.3);
     }
   }
-  .background {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    backface-visibility: hidden;
-    transform: scale(1.2);
-    filter: blur(var(--blur));
-    transition:
-      filter 0.3s,
-      transform 0.3s;
-    animation: fade-blur-in 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-  .gray {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.5) 100%),
-      radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0.3) 166%);
-  }
+}
+.background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  backface-visibility: hidden;
+  transform: scale(1.2);
+  filter: blur(var(--blur));
+  transition: filter 0.3s, transform 0.3s;
+}
+
+.gray {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(rgba(0, 0, 0, 0) 0, rgba(0, 0, 0, 0.5) 100%),
+    radial-gradient(rgba(0, 0, 0, 0) 33%, rgba(0, 0, 0, 0.3) 166%);
 }
 </style>
