@@ -336,7 +336,7 @@ const changeBackground = (type, reset = false) => {
         $message.info("已恢复为默认壁纸，刷新后生效");
       },
     });
-    return true;
+    return false;
   }
   backgroundType.value = type;
   $message.success(`已切换为${backgroundTypeArr[type].name}，刷新后生效`);
