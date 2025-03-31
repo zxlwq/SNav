@@ -1,17 +1,17 @@
 <template>
-  <div :class="status.siteStatus !== 'normal' ? 'cover focus' : 'cover'">
+  <div :class="{ cover: true, focus: status.siteStatus !== 'normal' }">
     <img
       v-show="status.imgLoadStatus"
       class="background"
       alt="background"
-      :src="bgUrl"
+      src="https://images.zxl.cc.ua/blog/12.webp"
       :style="{ '--blur': set.backgroundBlur + 'px' }"
       @load="imgLoadComplete"
-      @error.once="imgLoadError"
+      @error="imgLoadError"
       @animationend="imgAnimationEnd"
     />
     <Transition name="fade">
-      <div class="gray" />
+      <div v-if="set.showBackgroundGray" class="gray" />
     </Transition>
   </div>
 </template>
