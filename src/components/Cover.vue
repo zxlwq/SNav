@@ -57,24 +57,6 @@ const setBgUrl = () => {
   }
 };
 
-// 图片加载完成
-const imgLoadComplete = () => {
-  imgTimeout.value = setTimeout(
-    () => {
-      status.setImgLoadStatus(true);  // 设置图片加载状态为已加载
-    },
-    Math.floor(Math.random() * (600 - 300 + 1)) + 300,  // 随机延时
-  );
-};
-
-// 图片动画完成
-const imgAnimationEnd = () => {
-  console.log("壁纸加载且动画完成");
-  // 执行加载完成的回调事件
-  emit("loadComplete");
-};
-
-
 onMounted(() => {
   setBgUrl();
 });
