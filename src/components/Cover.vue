@@ -4,7 +4,7 @@
       v-show="status.imgLoadStatus"
       class="background"
       alt="background"
-      src="https://images.zxl.cc.ua/blog/12.webp"
+      src="https://images.zxlwq.dpdns.org/blog/12.webp"
       :style="{ '--blur': set.backgroundBlur + 'px' }"
       @load="imgLoadComplete"
       @error="imgLoadError"
@@ -43,7 +43,7 @@ const setBgUrl = () => {
       break;
     }
     case 2:
-      bgUrl.value = backgroundCustom || "https://images.zxl.cc.ua/blog/12.webp";
+      bgUrl.value = backgroundCustom || "https://images.zxlwq.dpdns.org/blog/12.webp";
       break;
     default:
       bgUrl.value = `/background/bg4.jpg`;
