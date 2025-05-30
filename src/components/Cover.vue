@@ -72,7 +72,8 @@ const imgAnimationEnd = () => {
 const imgLoadError = () => {
   console.error("壁纸加载失败：", bgUrl.value);
   $message.error("壁纸加载失败，已临时切换回默认");
-  bgUrl.value = `/background/bg${bgRandom}.jpg`;
+  bgUrl.value = `/background/bg4.jpg`;
+  status.setImgLoadStatus(true);
 };
 
 onMounted(() => {
