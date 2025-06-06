@@ -8,7 +8,7 @@ const useSetDataStore = defineStore("setData", {
       // 壁纸类别
       // 0 本地 / 1 必应 / 2 随机风景 / 3 随机动漫 / 4 自定义
       backgroundType: 0,
-      backgroundCustom: "https://bloga.zxlwq.dpdns.org/jpg/favicon.webp",
+      backgroundCustom: "/background/favicon.jpg",
       // 壁纸遮罩
       showBackgroundGray: true,
       // 壁纸亮度（默认 100%）
