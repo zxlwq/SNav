@@ -1,3 +1,5 @@
+## 背景图路径：src/components/Cover.vue
+
 <p>
 <strong><h2>Snavigation</h2></strong>
 一个简约的起始页
