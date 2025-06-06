@@ -1,12 +1,22 @@
 <template>
   <n-tabs class="all-box" size="large" animated>
     <!-- 捷径 -->
-    <n-tab-pane class="tab-pane" name="link" tab="捷径">
+    <n-tab-pane
+      class="tab-pane"
+      name="link"
+      tab="捷径"
+      :tab-style="{ justifyContent: 'flex-start', display: 'flex' }"
+    >
       <ShortCut />
     </n-tab-pane>
 
     <!-- 便签 -->
-    <n-tab-pane class="tab-pane" name="note" tab="便签">
+    <n-tab-pane
+      class="tab-pane"
+      name="note"
+      tab="便签"
+      :tab-style="{ justifyContent: 'center', display: 'flex' }"
+    >
       <div class="note-box">
         <n-input v-model:value="noteSearch" placeholder="搜索便签..." clearable />
         <n-input
@@ -36,7 +46,12 @@
     </n-tab-pane>
 
     <!-- 待办 -->
-    <n-tab-pane class="tab-pane" name="more" tab="待办">
+    <n-tab-pane
+      class="tab-pane"
+      name="more"
+      tab="待办"
+      :tab-style="{ justifyContent: 'flex-end', display: 'flex' }"
+    >
       <div class="todo-box">
         <n-input v-model:value="todoSearch" placeholder="搜索待办..." clearable />
         <n-input
@@ -142,7 +157,7 @@ const filteredTodos = computed(() =>
     .sort((a, b) => a.done - b.done)
 );
 
-// 回车自动失焦
+// 回车失焦
 const onEnterBlur = (event) => {
   event.target.blur();
 };
@@ -171,31 +186,6 @@ body,
 
 .all-box {
   height: 100%;
-}
-
-/* 自定义 Tab 标签对齐方式 */
-.n-tabs-nav__wrapper {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.n-tabs-tab {
-  flex: 1;
-  text-align: center;
-}
-
-/* 三个 Tab 标签分别对齐：左中右 */
-.n-tabs-tab:nth-child(1) {
-  text-align: left;
-  padding-left: 16px;
-}
-.n-tabs-tab:nth-child(2) {
-  text-align: center;
-}
-.n-tabs-tab:nth-child(3) {
-  text-align: right;
-  padding-right: 16px;
 }
 
 .tab-pane {
