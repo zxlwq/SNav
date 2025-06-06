@@ -3,7 +3,7 @@
     <div class="copyright">
       <span class="site-name">{{ siteName }}</span>
       <span class="year">{{ fullYear }}</span>
-      <span class="anthor" @click="jumpTo(copyrightLink ?? 'https://bloga.zxl.cc.ua')">
+      <span class="anthor" @click="jumpTo(copyrightLink ?? 'https://blog.zxlwq.dpdns.org')">
         {{ siteAnthor }}
       </span>
       <span v-if="icp" class="icp" @click="jumpTo('')">
@@ -25,7 +25,7 @@
         </div>
         <div class="desc">
           <n-space class="link" justify="center">
-            <n-button strong secondary @click="jumpTo('https://home.zxl.cc.ua')">
+            <n-button strong secondary @click="jumpTo('https://home.zxlwq.dpdns.org')">
               Github
             </n-button>
           </n-space>
