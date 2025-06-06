@@ -1,22 +1,12 @@
 <template>
-  <n-tabs class="all-box" size="large" animated>
+  <n-tabs class="all-box tabs--justify" size="large" animated>
     <!-- 捷径 -->
-    <n-tab-pane
-      class="tab-pane"
-      name="link"
-      tab="捷径"
-      :tab-style="{ justifyContent: 'flex-start', display: 'flex' }"
-    >
+    <n-tab-pane class="tab-pane" name="link" tab="捷径">
       <ShortCut />
     </n-tab-pane>
 
     <!-- 便签 -->
-    <n-tab-pane
-      class="tab-pane"
-      name="note"
-      tab="便签"
-      :tab-style="{ justifyContent: 'center', display: 'flex' }"
-    >
+    <n-tab-pane class="tab-pane" name="note" tab="便签">
       <div class="note-box">
         <n-input v-model:value="noteSearch" placeholder="搜索便签..." clearable />
         <n-input
@@ -35,7 +25,7 @@
                 v-model:value="notes[index]"
                 type="text"
                 @blur="saveNotes"
-                @keyup.enter="onEnterBlur"
+                @keyup.enter="$event.target.blur()"
                 style="flex: 1;"
               />
               <n-button size="tiny" type="error" @click="removeNote(index)">删除</n-button>
@@ -46,12 +36,7 @@
     </n-tab-pane>
 
     <!-- 待办 -->
-    <n-tab-pane
-      class="tab-pane"
-      name="more"
-      tab="待办"
-      :tab-style="{ justifyContent: 'flex-end', display: 'flex' }"
-    >
+    <n-tab-pane class="tab-pane" name="more" tab="待办">
       <div class="todo-box">
         <n-input v-model:value="todoSearch" placeholder="搜索待办..." clearable />
         <n-input
@@ -76,7 +61,7 @@
               <n-input
                 v-model:value="todo.text"
                 @blur="saveTodos"
-                @keyup.enter="onEnterBlur"
+                @keyup.enter="$event.target.blur()"
                 style="flex: 1; margin: 0 8px;"
               />
               <n-button size="tiny" type="error" @click="removeTodo(index)">删除</n-button>
@@ -125,9 +110,7 @@ const saveNotes = () => {
   localStorage.setItem(NOTE_KEY, JSON.stringify(notes.value));
 };
 const filteredNotes = computed(() =>
-  notes.value.filter((n) =>
-    n.toLowerCase().includes(noteSearch.value.trim().toLowerCase())
-  )
+  notes.value.filter((n) => n.toLowerCase().includes(noteSearch.value.toLowerCase()))
 );
 
 // ====== 待办功能 ======
@@ -152,15 +135,10 @@ const saveTodos = () => {
 const filteredTodos = computed(() =>
   [...todos.value]
     .filter((todo) =>
-      todo.text.toLowerCase().includes(todoSearch.value.trim().toLowerCase())
+      todo.text.toLowerCase().includes(todoSearch.value.toLowerCase())
     )
-    .sort((a, b) => a.done - b.done)
+    .sort((a, b) => a.done - b.done) // 未完成排前
 );
-
-// 回车失焦
-const onEnterBlur = (event) => {
-  event.target.blur();
-};
 
 // 初始化加载本地数据
 onMounted(() => {
@@ -171,7 +149,7 @@ onMounted(() => {
   if (savedTodos) todos.value = JSON.parse(savedTodos);
 });
 
-// 自动保存
+// 自动保存（如你想省略可去掉）
 watch(notes, saveNotes, { deep: true });
 watch(todos, saveTodos, { deep: true });
 </script>
@@ -186,6 +164,11 @@ body,
 
 .all-box {
   height: 100%;
+}
+
+.tabs--justify .n-tabs-nav__wrapper {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .tab-pane {
