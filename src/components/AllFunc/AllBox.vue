@@ -1,5 +1,5 @@
 <template>
-  <n-tabs class="all-box tabs--justify" size="large" animated>
+  <n-tabs class="all-box" size="large" animated>
     <!-- 捷径 -->
     <n-tab-pane class="tab-pane" name="link" tab="捷径">
       <ShortCut />
@@ -25,7 +25,7 @@
                 v-model:value="notes[index]"
                 type="text"
                 @blur="saveNotes"
-                @keyup.enter="$event.target.blur()"
+                @keyup.enter="onEnterBlur"
                 style="flex: 1;"
               />
               <n-button size="tiny" type="error" @click="removeNote(index)">删除</n-button>
@@ -61,7 +61,7 @@
               <n-input
                 v-model:value="todo.text"
                 @blur="saveTodos"
-                @keyup.enter="$event.target.blur()"
+                @keyup.enter="onEnterBlur"
                 style="flex: 1; margin: 0 8px;"
               />
               <n-button size="tiny" type="error" @click="removeTodo(index)">删除</n-button>
@@ -110,7 +110,9 @@ const saveNotes = () => {
   localStorage.setItem(NOTE_KEY, JSON.stringify(notes.value));
 };
 const filteredNotes = computed(() =>
-  notes.value.filter((n) => n.toLowerCase().includes(noteSearch.value.toLowerCase()))
+  notes.value.filter((n) =>
+    n.toLowerCase().includes(noteSearch.value.trim().toLowerCase())
+  )
 );
 
 // ====== 待办功能 ======
@@ -135,10 +137,15 @@ const saveTodos = () => {
 const filteredTodos = computed(() =>
   [...todos.value]
     .filter((todo) =>
-      todo.text.toLowerCase().includes(todoSearch.value.toLowerCase())
+      todo.text.toLowerCase().includes(todoSearch.value.trim().toLowerCase())
     )
-    .sort((a, b) => a.done - b.done) // 未完成排前
+    .sort((a, b) => a.done - b.done)
 );
+
+// 回车自动失焦
+const onEnterBlur = (event) => {
+  event.target.blur();
+};
 
 // 初始化加载本地数据
 onMounted(() => {
@@ -149,7 +156,7 @@ onMounted(() => {
   if (savedTodos) todos.value = JSON.parse(savedTodos);
 });
 
-// 自动保存（如你想省略可去掉）
+// 自动保存
 watch(notes, saveNotes, { deep: true });
 watch(todos, saveTodos, { deep: true });
 </script>
@@ -166,9 +173,29 @@ body,
   height: 100%;
 }
 
-.tabs--justify .n-tabs-nav__wrapper {
+/* 自定义 Tab 标签对齐方式 */
+.n-tabs-nav__wrapper {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.n-tabs-tab {
+  flex: 1;
+  text-align: center;
+}
+
+/* 三个 Tab 标签分别对齐：左中右 */
+.n-tabs-tab:nth-child(1) {
+  text-align: left;
+  padding-left: 16px;
+}
+.n-tabs-tab:nth-child(2) {
+  text-align: center;
+}
+.n-tabs-tab:nth-child(3) {
+  text-align: right;
+  padding-right: 16px;
 }
 
 .tab-pane {
