@@ -42,7 +42,7 @@ const imgAnimationEnd = () => {
 const imgLoadError = () => {
   console.error("壁纸加载失败：/background/favicon.jpg");
   $message.error("壁纸加载失败，已临时禁用背景图");
-  status.setImgLoadStatus(false);
+  status.setImgLoadStatus(true);
 };
 
 onBeforeUnmount(() => {
